@@ -4,9 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" class="css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <script src="js/script.js" defer></script>
     <title>University Grade Calculator</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Grade Calculator</h1>
+        <p>By Bishal Bhandari</p>
+    </header>   
+    <main class="main">
+        <div class="container">
+            <div id="modules-list">
+                <div class="modules" id="module1">
+                    <p class="module-name">PGA</p>
+                    <p class="module-weight">20</p>
+                    <p class="grade-achived">85</p>
+                    <button class="material-symbols-outlined" onclick="remove(1)">
+                        remove_circle
+                    </button>
+                </div>
+            </div>
+            <button class="material-symbols-outlined" id="add-module-btn">
+                add_circle
+            </button>
+    </main>
+
+    <div id="cover">
+        <div class="add-form" id="form-box">
+            <h1> Add Modules Details</h1>
+            <input type="text" name="module_name" placeholder="Module Name">
+            <input type="number" name="module_weight" placeholder="Weight/Credit" min=0 max=100  >
+            <input type="number" name="grade_achived" placeholder="Grade Achieved in %" min=0 max=100 >
+            <button type="button" id="add-btn-form">Add Module</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
