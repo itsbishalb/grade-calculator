@@ -1,59 +1,85 @@
-const add_btn_form = document.getElementById("add-btn-form");
-const add_module_btn = document.getElementById("add-module-btn");
-const form_box = document.getElementById("form-box");
-const cover_container = document.getElementById("cover");
-let module = {
-    id:"",
-    name: "",
-    weight: "",
-    grade:0
+const modules =  {
+    semesterId : 1,
+    moduleId : 1,
 }
 
-let id_count = 0;
+function addModule(id){
+    const moduleToAdd = document.getElementById("semester"+id+"Modules")
+    
+    moduleToAdd.insertAdjacentHTML("beforeend", ` 
+        <tbody id="module${id}" >
+            <td><input type="text" class="moduleName" placeholder="SYS"></td>
+            <td><input type="number" class="moduleWeight" placeholder="10"></td>
+            <td><input type="number" class="moduleMark" placeholder="80"></td>
+            <td><button type="button" aria-label="Delete Module" class="deleteBtn material-symbols-outlined" onclick="deleteModule(${id})">delete</button></td>
+        </tbody>
+          
+    `)
+}
 
-let user_modules = []
-add_btn_form.addEventListener("click", function(){
-    form_box.style.display = "none";
-    cover_container.style.display = "none";
-    module.id = id_count++;
-    module.name = document.querySelector('input[name=module_name]').value
-    module.weight = document.querySelector('input[name=module_weight]').value
-    module.grade = document.querySelector('input[name=grade_achived]').value
+function deleteModule(id){
+    const moduleToRemove = document.getElementById("module"+id)
+    moduleToRemove.remove()
+}
 
-    user_modules[id_count] = module; 
+function deleteSemester(id){
+    const semesterToRemove = document.getElementById("semester"+id)
+    semesterToRemove.remove()
+}
 
-    add_modules()
+document.getElementById("addSemester").addEventListener("click",() => {
+    document.getElementById("semesterList").insertAdjacentHTML("beforeend",`<div class="modulesList" id="semester${++modules.semesterId}">
+    <h2 class="semText">Semester ${modules.semesterId}</h2>
+    <button type="button" aria-label="Delete Semester" class="deleteSemester material-symbols-outlined" onclick="deleteSemester(${modules.semesterId})">clear</button>
+<table class="modules" id="semester${modules.semesterId}Modules">
+        <thead>
+            <th>Modules Name</th>
+            <th>Weight</th>
+            <th>Marks (%)</th>
+        </thead>
+       ${moduleInput(++modules.moduleId)}
+</table>
+${moduleFooter(modules.semesterId)}
+</div>
+`) 
+
 })
 
-add_module_btn.addEventListener("click",function(){
-    cover_container.style.display = "block";
-    form_box.style.display = "block";
+
+
+function moduleInput(id){
+     return `
+     <tbody class="modulesBody" id="module${id}" >
+                    <td><input type="text" class="moduleName" placeholder="SYS"></td>
+                    <td><input type="number" class="moduleWeight" placeholder="10"></td>
+                    <td><input type="number" class="moduleMark" placeholder="80"></td>
+                    <td><button type="button" aria-label="Delete Module" class="deleteBtn material-symbols-outlined" onclick="deleteModule(${id})">delete</button></td>
+    </tbody> `
+}
+
+
+function moduleFooter(semesterId){
+    return `<div class="moduleFooter">
+    <button aria-label="Add Module" class="btn addBtn" onclick="addModule(${semesterId})">
+        <span class="material-symbols-outlined addIcon ">add</span> 
+        <span>Add Modules</span>
+    </button>
+    
+     <button aria-label="Clear Module" class="btn clearBtn" onclick="clearModule(${semesterId})">
+        <span class="material-symbols-outlined clearIcon">clear</span> 
+        <span>Clear Modules</span>
+     </button>
+  </div>`
+}
+
+
+document.getElementById("calculateTotal").addEventListener("click",() => {
+    const mWeight = document.getElementsByClassName("moduleWeight");
+    const mMark = document.getElementsByClassName("moduleMark");
+
+    for(var i = 0; i < mWeight.length; i++){
+        console.log(mWeight[i].value)
+    }
+   
+    console.log(mMark)
 })
-
-
-
-
-function add_modules(){
-const modules_list = document.getElementById("modules-list"); 
-modules_list.innerHTML += 
-    `
-        <div class="modules" id="module${id_count}">
-            <p class="module-name">${user_modules[id_count].name}</p>
-            <p class="module-weight">${user_modules[id_count].weight}</p>
-            <p class="grade-achived">${user_modules[id_count].grade}</p>
-            <button class="material-symbols-outlined" onclick="remove(${id_count})">
-                remove_circle
-            </button>
-        </div>
-    `
-}
-
-
-function remove (num){
-    el_remove = document.getElementById("module"+num)
-    el_remove.remove()
-    user_modules[num] = null;
-    console.log(user_modules[num])
-}
-
-
