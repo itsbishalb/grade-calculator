@@ -5,15 +5,15 @@ const modules =  {
 
 function addModule(id){
     const moduleToAdd = document.getElementById("semester"+id+"Modules")
-    
-    moduleToAdd.insertAdjacentHTML("beforeend", ` 
+
+    moduleToAdd.insertAdjacentHTML("beforeend", `
         <tbody id="module${id}" >
             <td><input type="text" class="moduleName" placeholder="SYS"></td>
             <td><input type="number" class="moduleWeight" placeholder="10"></td>
             <td><input type="number" class="moduleMark" placeholder="80"></td>
             <td><button type="button" aria-label="Delete Module" class="deleteBtn material-symbols-outlined" onclick="deleteModule(${id})">delete</button></td>
         </tbody>
-          
+
     `)
 }
 
@@ -27,22 +27,30 @@ function deleteSemester(id){
     semesterToRemove.remove()
 }
 
-document.getElementById("addSemester").addEventListener("click",() => {
+document.getElementById("add-semester-btn").addEventListener("click",() => {
+    document.getElementById("container").style.display = "flex"
+    document.getElementById("semester-form").style.display = "none"
     document.getElementById("semesterList").insertAdjacentHTML("beforeend",`<div class="modulesList" id="semester${++modules.semesterId}">
     <h2 class="semText">Semester ${modules.semesterId}</h2>
     <button type="button" aria-label="Delete Semester" class="deleteSemester material-symbols-outlined" onclick="deleteSemester(${modules.semesterId})">clear</button>
-<table class="modules" id="semester${modules.semesterId}Modules">
-        <thead>
-            <th>Modules Name</th>
-            <th>Weight</th>
-            <th>Marks (%)</th>
-        </thead>
-       ${moduleInput(++modules.moduleId)}
-</table>
-${moduleFooter(modules.semesterId)}
-</div>
+    <table class="modules" id="semester${modules.semesterId}Modules">
+            <thead>
+                <th>Modules Name</th>
+                <th>Weight</th>
+                <th>Marks (%)</th>
+            </thead>
+        ${moduleInput(++modules.moduleId)}
+    </table>
+        ${moduleFooter(modules.semesterId)}
+    </div>
 `) 
+   alert("clicked")
+})
 
+
+document.getElementById("addSemester").addEventListener("click",() => {
+    document.getElementById("container").style.display = "none"
+    document.getElementById("semester-form").style.display = "flex"
 })
 
 
@@ -61,12 +69,12 @@ function moduleInput(id){
 function moduleFooter(semesterId){
     return `<div class="moduleFooter">
     <button aria-label="Add Module" class="btn addBtn" onclick="addModule(${semesterId})">
-        <span class="material-symbols-outlined addIcon ">add</span> 
+        <span class="material-symbols-outlined addIcon ">add</span>
         <span>Add Modules</span>
     </button>
-    
+
      <button aria-label="Clear Module" class="btn clearBtn" onclick="clearModule(${semesterId})">
-        <span class="material-symbols-outlined clearIcon">clear</span> 
+        <span class="material-symbols-outlined clearIcon">clear</span>
         <span>Clear Modules</span>
      </button>
   </div>`
@@ -80,6 +88,6 @@ document.getElementById("calculateTotal").addEventListener("click",() => {
     for(var i = 0; i < mWeight.length; i++){
         console.log(mWeight[i].value)
     }
-   
+
     console.log(mMark)
 })

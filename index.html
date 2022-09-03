@@ -10,8 +10,31 @@
     <title>Grade Calculator</title>
 </head>
 <body>
-    <div class="container" id="container">
+    <header>        
         <h1 class="headerText">Grade Calculator</h1>
+    </header>
+    
+    <div id="semester-form">
+        <h1 class="add-semester-text">Add Semester</h1>
+        <div class="form">
+            <div class="formContainer">
+                <label for="semesterName">Semester Name</label>
+                <input type="text" value="Semester" id="semesterName">
+            </div>
+            <div class="formContainer">
+                <label for="moduleNumber">Total Modules</label>
+                <input type="number" value="1" id="moduleNumber">
+            </div>
+
+            <button aria-label="Add Semester" class="btn addBtn add-semester-btn" id="add-semester-btn">
+                <span class="material-symbols-outlined addIcon ">add</span> 
+                <span>Add Semester</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="container" id="container">
+
         <div id="semesterList">
             <div class="modulesList" id="semester1">
                 <h2 class="semText">Semester 1</h2>
@@ -19,7 +42,7 @@
                <table class="modules" id="semester1Modules">
                     <thead>
                         <th>Modules Name</th>
-                        <th>Weight</th>
+                        <th>Weight</th> 
                         <th>Marks (%)</th>
                     </thead>
                     <tbody class="modulesBody" id="module1" >
@@ -54,12 +77,10 @@
         <div id="resetOptions">
             <button type="button" id="newCalculation">New Calculation</button>
             <button type="button" id="download">Download</button>
-            <button type="button" id="edit">Edit</button>#
-
-
-            
+            <button type="button" id="edit">Edit</button>
         </div>
         </footer>
     </div>
+
 </body>
 </html>

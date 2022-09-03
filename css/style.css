@@ -21,6 +21,7 @@ body{
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #030774;
+    text-align: center;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -32,6 +33,7 @@ body{
 }
 
 .semText{
+    padding-top: 0.8rem;
    font-size: 1.6rem;
 }
 
@@ -77,7 +79,8 @@ thead th{
 .moduleName,
 .moduleWeight,
 .moduleMark,
-.deleteBtn{
+.deleteBtn,
+input{
     margin-top: 10px;
     padding: 10px 5px;
     border: none; 
@@ -139,9 +142,6 @@ thead th{
 }
 
 
-input{
-    color: #4A9292;
-}
 
 footer{
     margin-top: 3rem;
@@ -181,4 +181,33 @@ footer button{
 #resetOptions,#defaultFooter{
     display: flex;
     justify-content: center;
+}
+
+
+#semester-form{
+    display: none;
+    flex-direction: column;
+    margin: 20px auto;
+    align-items: center;
+    background-color: #FFFFFF;
+    height:500px;
+    width: 500px;;
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+}
+
+#semester-form .form{
+    display: block;
+    width:70%;
+}
+
+
+
+.add-semester-btn{
+    margin: 0px auto;
+
 }
