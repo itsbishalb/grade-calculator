@@ -27,6 +27,8 @@ function removeSemester(semesterID){
 // this function calculate the average grade. 
 
 function CalculateTotal(){
+    const hideOptions = document.getElementById("showOptions")
+    const results = document.getElementById("showResults")
     const mWeight = document.getElementsByClassName("moduleWeight");
     const mMark = document.getElementsByClassName("moduleMark");
     const len = mWeight.length >= mMark.length ? mWeight.length : mMark.length
@@ -41,7 +43,6 @@ function CalculateTotal(){
 
         let currentMark = parseFloat(mMark[i].value)
         if(currentMark=== "" || currentMark === undefined || currentMark === null){
-          console.log("here")
           currentMark = 0;
         }
       marksWeight += currentMark * currentWeight

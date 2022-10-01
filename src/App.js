@@ -41,7 +41,7 @@
   
   function LoadSemesterList(props){
     return (
-    <div id="semesterList">
+    <div id="semesterList"> 
           {props.semesterHTML}
     </div>
     )
@@ -53,7 +53,7 @@
     return (
               <div className="modulesList" id={"semester"+props.semesterID}>
                   <h2 className="semText" contentEditable="true" suppressContentEditableWarning={true}>Semester Name</h2>
-                  <button type="button" aria-label="Delete Semester" className="deleteSemester material-symbols-outlined" onClick={() => removeSemester(props.semesterID)}>clear</button>
+                  <button type="button" aria-label="Delete Semester" className="deleteSemester  material-symbols-outlined" onClick={() => removeSemester(props.semesterID)}>clear</button>
                  <table className="modules" id={"semester"+props.semesterID+"Modules"}>
                       <thead>
                         <tr>
@@ -68,17 +68,38 @@
             </div>
       )
     }
-  
-  
-  
+
   export function AddModule(props){
+    const [values,setValues] = React.useState({
+      moduleName: "",
+      moduleWeight: "",
+      moduleMark:"",
+    })
+
+
+  // valaditing input
+  function validateInput(event){
+      const {name,value} = event.target
+      if(name == "moduleWeight"){
+        if(isNaN(value) && value){
+          return
+        }
+      } else if(name == "moduleMark"){
+          if((isNaN(value) || (parseFloat(value) > 100 || parseFloat(value) < 0)) && value){
+            return
+          }
+      }
+      setValues((current) => {    
+        return {...current, [name] : value}
+      })
+  }
     return (
       <tbody className="modulesBody" id={"module" + props.moduleID} >
         <tr>
-          <td><input type="text" className="moduleName" placeholder="SYS" /></td>
-          <td><input type="number" className="moduleWeight" placeholder="10" required /> </td>
-          <td><input type="number" className="moduleMark" placeholder="80" required /></td>
-          <td><button type="button" aria-label="Delete Module" className="deleteBtn material-symbols-outlined" onClick={() => removeModule(props.moduleID,props.addModuleHTML)}>delete</button></td>
+          <td><input type="text" className="moduleName" name="moduleName" placeholder={values.moduleName == "" ? "SYS":values.moduleName} value={values.moduleName} onInput ={validateInput}/></td>
+          <td><input type="number" className="moduleWeight" name="moduleWeight" placeholder={values.moduleWeight == "" ? "10":values.moduleWeight} value={values.moduleWeight} onInput ={validateInput}/> </td>
+          <td><input type="number" min="0" className="moduleMark" name="moduleMark" placeholder={values.moduleMark == "" ? "0-100%":values.moduleMark} value={values.moduleMark} onInput ={validateInput} /></td>
+          <td><button type="button" aria-label="Delete Module" className="deleteBtn material-symbols-outlined " onClick={() => removeModule(props.moduleID,props.addModuleHTML)}>delete</button></td>
         </tr>
     </tbody>
     )
@@ -89,18 +110,21 @@
     return (
       <footer>
         <div id="defaultFooter">
-            <button type="button" id="calculateTotal" onClick={CalculateTotal}>Calculate</button>
-            <button type="button" id="addSemester" onClick={props.AddSemester}>Add Semester</button>
+            <button type="button" id="calculateTotal" className="" onClick={CalculateTotal}>Calculate</button>
+            <button type="button" id="addSemester" className="" onClick={props.AddSemester}>Add Semester</button>
         </div>
-        <div id="overallGrade">
-            <h1>Overall Grade</h1>
-            <h1 id="overallMarks">0.00%</h1>
+        <div className=""> 
+          <div id="overallGrade">
+              <h1>Overall Grade</h1>
+              <h1 id="overallMarks">0.00%</h1>
+          </div>
+          <div id="resetOptions" className="onCalculate">
+              <button type="button" id="newCalculation" onClick={props.reload}>New Calculation</button>
+              <button type="button" id="download">Download</button>
+              <button type="button" id="edit">Edit</button>
+          </div>
         </div>
-        <div id="resetOptions">
-            <button type="button" id="newCalculation" onClick={props.reload}>New Calculation</button>
-            <button type="button" id="download">Download</button>
-            <button type="button" id="edit">Edit</button>
-        </div>
+
     </footer>
     )
   }
@@ -108,12 +132,11 @@
   function MoodleFooter(props){
       return (
       <div className="moduleFooter">
-        <button aria-label="Add Module" className="btn addBtn" onClick={() => AddNewModule(props.values,props.addModuleHTML)}>
+        <button aria-label="Add Module" className="btn addBtn " onClick={() => AddNewModule(props.values,props.addModuleHTML)}>
           <span className="material-symbols-outlined addIcon ">add</span>
           <span>Add Modules</span>
         </button>
-  
-        <button aria-label="Clear Module" className="btn clearBtn" onClick={() => clearModules(props.semesterID)}>
+        <button aria-label="Clear Module" className="btn clearBtn " onClick={() => clearModules(props.semesterID)}>
           <span className="material-symbols-outlined clearIcon">clear</span>
           <span>Clear Modules</span>
         </button>

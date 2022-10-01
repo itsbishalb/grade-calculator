@@ -222,3 +222,12 @@ footer button{
     margin: 0px auto;
 
 }
+
+
+.showOptions{
+    display: "";
+}
+
+.hideOptions{
+    display: none;
+}
