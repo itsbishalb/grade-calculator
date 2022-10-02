@@ -26,12 +26,15 @@ function removeSemester(semesterID){
 
 // this function calculate the average grade. 
 
-function CalculateTotal(){
+function CalculateTotal(setShowOptions,setResultsOptions){
     const hideOptions = document.getElementById("showOptions")
     const results = document.getElementById("showResults")
     const mWeight = document.getElementsByClassName("moduleWeight");
     const mMark = document.getElementsByClassName("moduleMark");
     const len = mWeight.length >= mMark.length ? mWeight.length : mMark.length
+
+    setShowOptions(false)
+    setResultsOptions(true)
     let marksWeight = 0
     let weightSum = 0
     for(let i = 0; i < len; i++){
@@ -62,8 +65,11 @@ function AddNewModule(values,addModuleHTML){
     })
   }
 
+export function handleEditButton(setShowOptions,setResultsOptions){
+  setShowOptions(true)
+  setResultsOptions(false)
+}
 
 
 
-  
-  export {removeModule,clearModules,removeSemester,CalculateTotal,AddNewModule}
+ export {removeModule,clearModules,removeSemester,CalculateTotal,AddNewModule}
