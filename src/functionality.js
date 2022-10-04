@@ -1,4 +1,5 @@
 import {AddModule} from './App'
+import jsPDF from 'jspdf'
 // Receive moduleID as a paramater and then get the element by its ID to remove that specific module
 function removeModule(moduleID){
     const moduleToRemove = document.getElementById("module"+moduleID)
@@ -69,6 +70,25 @@ export function handleEditButton(setShowOptions,setResultsOptions){
   setShowOptions(true)
   setResultsOptions(false)
 }
+
+
+// download result
+export function download (){
+	const doc = new jsPDF("p","pt","a4");
+  let htmltoDownload = document.createElement("div")
+  htmltoDownload.className = "printHTML"
+  let semesterList = document.getElementById("semesterList")
+  htmltoDownload.innerHTML = semesterList.innerHTML
+  htmltoDownload.innerHTML += document.getElementById("overallGrade").innerHTML
+	doc.html(htmltoDownload, {
+		  callback: function(pdf) {
+			pdf.save("results.pdf");
+		}
+	});
+  }
+ // var doc = new jsPDF();
+ //   doc.fromHTML(`<html><head><title>Results</title></head><body>` + document.getElementById("semesterList").innerHTML + `</body></html>`);
+ //   doc.save('results.pdf');
 
 
 

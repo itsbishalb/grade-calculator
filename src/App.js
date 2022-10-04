@@ -1,7 +1,7 @@
   import React, { useEffect } from 'react';
   import './App.css';
   
-  import {removeModule,clearModules,removeSemester,CalculateTotal,AddNewModule,handleEditButton} from './functionality'
+  import {removeModule,clearModules,removeSemester,CalculateTotal,AddNewModule,handleEditButton,download} from './functionality'
   const values = {
     moduleID : 0,
     semesterID : 0,
@@ -58,7 +58,7 @@
   
   function LoadSemesterList(props){
     return (
-    <div id="semesterList"> 
+    <div id="semesterList" className='resultsToDownload'> 
           {props.semesterHTML}
     </div>
     )
@@ -134,14 +134,14 @@
         </div>
         <div>
           {/* show/hide results options */}
-          <div className={resultsOptions}>
+          <div className={"resultsToDownload " + resultsOptions}>
             <div id="overallGrade">
                 <h1>Overall Grade</h1>
                 <h1 id="overallMarks">0.00%</h1>
             </div>
             <div id="resetOptions">
                 <button type="button" id="newCalculation" onClick={props.reload}>New Calculation</button>
-                <button type="button" id="download">Download</button>
+                <button type="button" id="download" onClick={download}>Download</button>
                 <button type="button" id="edit" onClick={() => handleEditButton(props.setShowOptions, props.setResultsOptions)}>Edit</button>
             </div>
           </div>
