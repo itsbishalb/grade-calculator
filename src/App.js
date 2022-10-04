@@ -47,7 +47,7 @@
     return (
       <div className="App">
         <Header />
-        <div className={"container"}>
+        <div className={"container"} id="container">
           <LoadSemesterList semesterHTML={semesterHTML} values={values}/>
           <FooterSection AddSemester={AddSemester} reload={reload} showOptions={showOptions} setShowOptions={setShowOptions} resultsOptions ={resultsOptions} setResultsOptions = {setResultsOptions}/>
         </div>

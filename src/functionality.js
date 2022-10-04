@@ -25,7 +25,7 @@ function removeSemester(semesterID){
 
 
 
-// this function calculate the average grade. 
+// this function calculate the average grade.
 
 function CalculateTotal(setShowOptions,setResultsOptions){
     const hideOptions = document.getElementById("showOptions")
@@ -74,15 +74,15 @@ export function handleEditButton(setShowOptions,setResultsOptions){
 
 // download result
 export function download (){
-	const doc = new jsPDF("p","pt","a4");
-  let htmltoDownload = document.createElement("div")
-  htmltoDownload.className = "printHTML"
-  let semesterList = document.getElementById("semesterList")
-  htmltoDownload.innerHTML = semesterList.innerHTML
-  htmltoDownload.innerHTML += document.getElementById("overallGrade").innerHTML
+	const doc = new jsPDF("p","pt","a3");
+  let htmltoDownload = document.getElementById("container")
 	doc.html(htmltoDownload, {
+      html2canvas: {
+        scale: 1 // default is window.devicePixelRatio
+    },
 		  callback: function(pdf) {
-			pdf.save("results.pdf");
+			//pdf.save("results.pdf");
+      window.open(pdf.output('bloburl')); // to debug
 		}
 	});
   }
